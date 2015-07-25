@@ -3,8 +3,5 @@
     {% for article in articles_page.object_list %}
     {% include "parts/article.html" %}
     {% endfor %}
-    </ol><!-- /#posts-list -->
-</div>
-{% include 'pagination.html' %}
-</section><!-- /#content -->
+    {% include 'pagination.html' %}
 {% endblock content %}
