@@ -5,3 +5,14 @@
 .logo {
 	text-align: center;
 }
+
+.footer {
+    text-align: right;
+    color: #888;
+}
+
+.entry-content img {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
