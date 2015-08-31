@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="{{ DEFAULT_LANG }}">
+<head>
+    {% block head %}
+        <title>{% block title %}{{ SITENAME }}{% endblock title %}</title>
+        {% assets filters="cssmin", output="css/style.min.css", "css/style.css", "css/bootstrap-theme.css", "css/bootstrap.css" %}
+            <link rel="stylesheet" href="{{ SITEURL }}/{{ ASSET_URL }}">
+        {% endassets %}
+        <meta charset="utf-8" />
+
+        {% if FEED_RSS %}
+        <link href="{{ FEED_DOMAIN }}/{{ FEED_RSS }}" type="application/rss+xml" rel="alternate" title="{{ SITENAME }} RSS Feed" />
+        {% endif %}
+
+      {% endblock head %}
+</head>
+
+<body>
+    <div class="container main-container">
+        <div class="row">
+            <div class="col-md-offset-1 col-md-3">
+                <p class="logo">
+                    <a href="{{ SITEURL }}"><img src="{{ SITEURL }}/theme/img/pytest1.png"></a>
+                </p>
+                <h3>About pytest</h3>
+                <p>
+                    pytest is a mature full-featured Python testing tool that helps
+                    you write better programs.
+                </p>
+
+                <h3>Categories</h3>
+                <ul>
+                {% for cat, null in categories %}
+                    <li{% if cat == category %} class="active"{% endif %}><a href="{{ SITEURL }}/{{ cat.url }}">{{ cat }}</a></li>
+                {% endfor %}
+                </ul>
+
+                <h3>Resources</h3>
+                <ul>
+                    <li><a href="{{ SITEURL }}/archives.html">Archives</a></li>
+                    <li><a href="{{ FEED_RSS }}">RSS</a> </li>
+                    {% for url, title in RESOURCE_LINKS %}
+                    <li><a href="{{ url }}">{{ title }}</a></li>
+                    {% endfor %}
+                </ul>
+            </div>
+            <div class="col-md-8 main-content">
+              {% block content %}
+              {% endblock %}
+            </div>
+        </div>
+        <p class="footer">
+            © Copyright 2015, holger krekel and pytest-dev team. Created using <a href="http://blog.getpelican.com/">Pelican</a>.
+        </p>
+    </div>
+
+
+
+</body>
+</html>
