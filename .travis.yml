@@ -1,0 +1,21 @@
+language: python
+python: 3.4
+before_install:
+  - openssl aes-256-cbc -K $encrypted_e69c6696ca91_key -iv $encrypted_e69c6696ca91_iv -in publish-key.enc -out publish-key -d
+  - chmod u=rw,og= ~/.ssh/publish-key
+  - echo "Host github.com" >> ~/.ssh/configo
+  - echo "  IdentityFile ~/.ssh/publish-key" >> ~/.ssh/config
+  - git --version
+  - git remote set-url origin git@github.com:pytest-dev/blog.pytest.org.git
+  - git fetch origin -f gh-pages:gh-pages
+
+branches:
+  only:
+    - master
+
+install:
+  - pip install -r requirements.txt
+
+script:
+  - make html
+  - ghp-import -n -p -m "Update gh-pages." output
