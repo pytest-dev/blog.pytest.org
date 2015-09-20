@@ -9,9 +9,10 @@ SITEURL = ''
 EMAIL = 'pytest-dev@python.org'
 
 PATH = 'content'
-STATIC_PATHS = ('extra/favicon.ico', '2015')
+STATIC_PATHS = ('extra/favicon.ico', 'CNAME')
 EXTRA_PATH_METADATA = {
-    'extra/favicon.ico': {'path': 'favicon.ico'}
+    'extra/favicon.ico': {'path': 'favicon.ico'},
+    'CNAME': {'path': 'CNAME'},
 }
 
 TIMEZONE = 'Europe/Stockholm'
