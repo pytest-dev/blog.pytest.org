@@ -6,7 +6,7 @@
     <abbr>
       {{ article.date.strftime('%Y-%m-%d %H:%M') }}
       {% if article.author %}
-         av <a class="url fn" href="{{ SITEURL }}/{{ article.author.url }}">{{ article.author }}</a>
+         by <a class="url fn" href="{{ SITEURL }}/{{ article.author.url }}">{{ article.author }}</a>
       {% endif %}
     </abbr>
       <div class="entry-content">
