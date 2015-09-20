@@ -17,5 +17,4 @@ install:
   - pip install -r requirements.txt
 
 script:
-  - make html
-  - ghp-import -n -p -m "Update gh-pages." output
+  - make publish
