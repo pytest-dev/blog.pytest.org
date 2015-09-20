@@ -1,58 +1,64 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+        <title>pytest blog <small>blog</small></title>
+            <link rel="stylesheet" href="/theme/css/style.min.css?afbb39cd">
         <meta charset="utf-8" />
-        <title>A Pelican Blog - blog</title>
-        <link rel="stylesheet" href="/theme/css/main.css" />
-        <link href="/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="A Pelican Blog Atom Feed" />
 
-        <!--[if IE]>
-            <script src="https://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-        <![endif]-->
+        <link href="/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="pytest blog Atom Feed" />
+        <link href="/feeds/all.rss.xml" type="application/rss+xml" rel="alternate" title="pytest blog RSS Feed" />
+
 </head>
 
-<body id="index" class="home">
-        <header id="banner" class="body">
-                <h1><a href="/">A Pelican Blog </a></h1>
-                <nav><ul>
+<body>
+    <div class="container main-container">
+        <div class="row">
+            <div class="col-md-offset-1 col-md-3">
+                <p class="logo">
+                    <a href=""><img src="/theme/img/pytest1.png"></a>
+                </p>
+                <h3>About pytest</h3>
+                <p>
+                    pytest is a mature full-featured Python testing tool that helps
+                    you write better programs.
+                </p>
+
+                <h3>Categories</h3>
+                <ul>
                     <li><a href="/category/python.html">Python</a></li>
-                </ul></nav>
-        </header><!-- /#banner -->
+                </ul>
 
-            <aside id="featured" class="body">
-                <article>
-                    <h1 class="entry-title"><a href="/my-super-title.html">My super title</a></h1>
-<footer class="post-info">
-        <abbr class="published" title="2015-07-25T22:00:00+00:00">
-                Published: Lör 25 Juli 2015
-        </abbr>
-
-        <address class="vcard author">
-                By                         <a class="url fn" href="/author/pelme.html">pelme</a>
-        </address>
-<p>In <a href="/category/python.html">Python</a>.</p>
-<p>tags: <a href="/tag/blog.html">blog</a> </p>
-</footer><!-- /.post-info --><p>And we have a blog.</p>
+                <h3>Resources</h3>
+                <ul>
+                    <li><a href="/archives.html">Archives</a></li>
+                    <li><a href="">RSS</a> </li>
+                    <li><a href="http://pytest.org/latest/">Documentation</a></li>
+                </ul>
+            </div>
+            <div class="col-md-8 main-content">
+<div class="section">
+    <h1 class="entry-title">
+      My super title
+    </h1>
+    <abbr>
+      2015-07-25 22:00
+         av <a class="url fn" href="/author/pelme.html">pelme</a>
+    </abbr>
+      <div class="entry-content">
+        <p>And we have a blog.</p>
 <p>This was a nice hacking day.</p>
-<p><img alt="We're legion" class="img-rounded" src="{filename}/2015/images/legion.jpg" /></p>                </article>
-            </aside><!-- /#featured -->
-        <section id="extras" class="body">
-                <div class="social">
-                        <h2>social</h2>
-                        <ul>
-                            <li><a href="/feeds/all.atom.xml" type="application/atom+xml" rel="alternate">atom feed</a></li>
+<p><img alt="We're legion" class="img-rounded" src="{filename}/2015/images/legion.jpg" /></p>
+      </div><!-- /.entry-content -->
+</div>
 
-                        </ul>
-                </div><!-- /.social -->
-        </section><!-- /#extras -->
+            </div>
+        </div>
+        <p class="footer">
+            © Copyright 2015, holger krekel and pytest-dev team. Created using <a href="http://blog.getpelican.com/">Pelican</a>.
+        </p>
+    </div>
 
-        <footer id="contentinfo" class="body">
-                <address id="about" class="vcard body">
-                Proudly powered by <a href="http://getpelican.com/">Pelican</a>, which takes great advantage of <a href="http://python.org">Python</a>.
-                </address><!-- /#about -->
 
-                <p>The theme is by <a href="http://coding.smashingmagazine.com/2009/08/04/designing-a-html-5-layout-from-scratch/">Smashing Magazine</a>, thanks!</p>
-        </footer><!-- /#contentinfo -->
 
 </body>
 </html>

@@ -1,4 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>A Pelican Blog</title><link href="/" rel="alternate"></link><link href="/feeds/all-en.atom.xml" rel="self"></link><id>/</id><updated>2015-07-25T22:00:00+00:00</updated><entry><title>My super title</title><link href="/my-super-title.html" rel="alternate"></link><updated>2015-07-25T22:00:00+00:00</updated><author><name>pelme</name></author><id>tag:,2015-07-25:my-super-title.html</id><summary type="html">&lt;p&gt;And we have a blog.&lt;/p&gt;
-&lt;p&gt;This was a nice hacking day.&lt;/p&gt;
-&lt;p&gt;&lt;img alt="We're legion" class="img-rounded" src="{filename}/2015/images/legion.jpg" /&gt;&lt;/p&gt;</summary><category term="blog"></category></entry></feed>
