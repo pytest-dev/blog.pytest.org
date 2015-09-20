@@ -80,6 +80,8 @@ function start_up(){
     return 1
   fi
   echo 'Pelican and HTTP server processes now running in background.'
+  echo "You can access the server on http://localhost:$port/"
+  echo "Run make stopserver to stop the server."
 }
 
 ###

@@ -13,6 +13,7 @@ Now you should be able to run the blog and see it in your browser:
 * Create the output directory (you only need this the first time): `mkdir output`
 * Run the server `make devserver`
 * Open `http://localhost:8000`
+* When you are finished, stop the server by running `make stopserver`
 
 ## How to write a new article
 This blog uses [pelican](http://docs.getpelican.com/)
