@@ -10,7 +10,6 @@ This is the pytest blog. Do you want to write an article? make a pull request
 
 Now you should be able to run the blog and see it in your browser:
 * Go where you have cloned this project.
-* Create the output directory (you only need this the first time): `mkdir output`
 * Run the server `make devserver`
 * Open `http://localhost:8000`
 * When you are finished, stop the server by running `make stopserver`
