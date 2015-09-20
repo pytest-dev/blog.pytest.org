@@ -37,7 +37,7 @@
                 <h3>Resources</h3>
                 <ul>
                     <li><a href="{{ SITEURL }}/archives.html">Archives</a></li>
-                    <li><a href="{{ FEED_RSS }}">RSS</a> </li>
+                    <li><a href="{{ FEED_DOMAIN }}/{{ FEED_ALL_RSS }}">RSS</a> </li>
                     {% for url, title in RESOURCE_LINKS %}
                     <li><a href="{{ url }}">{{ title }}</a></li>
                     {% endfor %}
