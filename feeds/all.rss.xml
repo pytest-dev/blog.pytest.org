@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>pytest blog</title><link>/</link><description></description><atom:link href="/feeds/all.rss.xml" rel="self"></atom:link><lastBuildDate>Sat, 25 Jul 2015 22:00:00 +0200</lastBuildDate><item><title>My super title</title><link>/2015/we-have-a-blog/</link><description>&lt;p&gt;And we have a blog.&lt;/p&gt;
+&lt;p&gt;This was a nice hacking day.&lt;/p&gt;
+&lt;p&gt;&lt;img alt="We're legion" class="img-rounded" src="/2015/images/legion.jpg" /&gt;&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">pelme</dc:creator><pubDate>Sat, 25 Jul 2015 22:00:00 +0200</pubDate><guid>tag:,2015-07-25:2015/we-have-a-blog/</guid><category>blog</category></item></channel></rss>
