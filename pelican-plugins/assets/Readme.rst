@@ -102,5 +102,5 @@ theme's top-level directory:
    )
 
 .. _Webassets: https://github.com/miracle2k/webassets
-.. _Webassets documentation: http://webassets.readthedocs.org/en/latest/builtin_filters.html
-.. _environment's register() method: http://webassets.readthedocs.org/en/latest/environment.html#registering-bundles
+.. _Webassets documentation: https://webassets.readthedocs.io/en/latest/builtin_filters.html
+.. _environment's register() method: https://webassets.readthedocs.io/en/latest/environment.html#registering-bundles

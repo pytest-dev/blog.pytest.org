@@ -11,7 +11,7 @@ setting. This requires the use of SITEURL in the templates::
 
     <link rel="stylesheet" href="{{ SITEURL }}/{{ ASSET_URL }}">
 
-.. _webassets: https://webassets.readthedocs.org/
+.. _webassets: https://webassets.readthedocs.io/
 
 """
 from __future__ import unicode_literals
