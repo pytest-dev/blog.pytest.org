@@ -1,7 +1,7 @@
 Title: My super title
 Date: 2015-07-25 22:00
 Category: Python
-Tags: blog
+Tags: Python, blog, meta
 Authors: pelme
 Summary: Short version for index and feeds
 
