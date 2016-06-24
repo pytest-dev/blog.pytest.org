@@ -1,13 +1,22 @@
 {% block content %}
 <div class="section">
     <h1 class="entry-title">
-      {{ article.title }}
+      <a href="{{ SITEURL }}/{{ article.url }}">{{ article.title }}</a>
     </h1>
     <abbr>
-      {{ article.date.strftime('%Y-%m-%d %H:%M') }}
+      <div class="date">
+      published {{ article.date.strftime('%Y-%m-%d %H:%M') }}
+      </div>
+      <div class="author">
       {% if article.author %}
-         by <a class="url fn" href="{{ SITEURL }}/{{ article.author.url }}">{{ article.author }}</a>
+         written by <a class="url fn" href="{{ SITEURL }}/{{ article.author.url }}">{{ article.author }}</a>
       {% endif %}
+      </div>
+      <div class="tagslist">
+      {% if article.tags %}
+        tags: {{ article.tags|join(', ')|striptags }}
+      {% endif %}
+      </div>
     </abbr>
       <div class="entry-content">
         {{ article.content }}

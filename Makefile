@@ -45,7 +45,7 @@ else
 	cd $(OUTPUTDIR) && $(PY) -m pelican.server 8000
 endif
 
-devserver:
+devserver: html
 ifdef PORT
 	$(BASEDIR)/develop_server.sh restart $(PORT)
 else
