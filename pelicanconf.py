@@ -9,7 +9,7 @@ SITEURL = ''
 EMAIL = 'pytest-dev@python.org'
 
 PATH = 'content'
-STATIC_PATHS = ('extra/favicon.ico', 'CNAME')
+STATIC_PATHS = ('extra/favicon.ico', 'CNAME', 'posts')
 EXTRA_PATH_METADATA = {
     'extra/favicon.ico': {'path': 'favicon.ico'},
     'CNAME': {'path': 'CNAME'},
@@ -35,6 +35,7 @@ DEFAULT_PAGINATION = False
 PLUGIN_PATHS = ['pelican-plugins']
 PLUGINS = ['assets', 'sitemap']
 
+ARTICLE_PATHS = ['posts']
 ARTICLE_URL = '{date:%Y}/{slug}/'
 ARTICLE_SAVE_AS = '{date:%Y}/{slug}/index.html'
 PAGE_URL = '{slug}/'
@@ -45,5 +46,6 @@ PAGE_SAVE_AS = '{slug}/index.html'
 
 
 RESOURCE_LINKS = [
-    ('http://pytest.org/latest/', 'Documentation'),
+    ('http://planet.pytest.org', 'Planet Pytest'),
+    ('http://pytest.org/latest/', 'pytest.org'),
 ]

@@ -7,6 +7,6 @@ Summary: Short version for index and feeds
 
 And we have a blog.
 
-This was a nice hacking day.
+This was a nice hacking day!.
 
-![We're legion]({filename}/2015/images/legion.jpg){.img-rounded}
+![We're legion]({attach}images/legion.jpg){.img-rounded}
