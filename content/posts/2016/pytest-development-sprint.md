@@ -73,6 +73,8 @@ Bugs fixed/in progress:
 
 In total [35 pull requests were merged](https://github.com/pytest-dev/pytest/pulls?utf8=%E2%9C%93&q=is%3Apr%20is%3Amerged%20updated%3A2016-06-20..2016-06-27%20) to pytest, and [at least 12](https://bitbucket.org/hpk42/tox/pull-requests/?state=MERGED) to tox, not to mention many others to plugins.
 
+(It is worth noting that this is not an exhaustive list of all features that will go into pytest 3.0; a separate post will the full release notes will be made once the release is done.)
+
 |   | |
 | ------------- | ------------- |
 | ![Learning outside]({attach}images/sprint_workingoutside.jpg){.img-rounded} | ![Stickers 2.0]({attach}images/sprint_stickers.jpg){.img-rounded}   |
@@ -80,8 +82,8 @@ In total [35 pull requests were merged](https://github.com/pytest-dev/pytest/pul
 | ![Sampling the local delicacies]({attach}images/sprint_cake.jpg){.img-rounded} | ![Enjoying the beergarden]({attach}images/sprint_beergarden.jpg){.img-rounded} |
 
 
-We also spent some time designing the [stickers](https://twitter.com/pytestdotorg/status/745528947736092672) and [t-shirts](https://github.com/kvas-it/pytest-design/blob/master/tshirt_example.png). Surveys will be going out to backers who chose these perks in the fundraising campaign very soon.
+We also spent some time designing the [stickers](https://twitter.com/pytestdotorg/status/745528947736092672) and [t-shirts](https://github.com/kvas-it/pytest-design/blob/master/tshirt_example.png). Surveys went out to those who backed the fundraising campaign last week and the goods will be shipped very soon.
 
-Thank you so much to everyone who supported the sprint. We have greatly expanded knowledge of pytest internals, and we're looking forward to bringing you pytest 3.0 very soon (aiming for before [EuroPython](https://ep2016.europython.eu/conference/talks/pytest-30))!
+Thank you so much to everyone who supported the sprint. We have greatly improved our knowledge of pytest internals, expanded the pytest contributor community, and we're looking forward to bringing you pytest 3.0 very soon (aiming for before [EuroPython](https://ep2016.europython.eu/conference/talks/pytest-30))!
 
 ![Group photo]({attach}images/sprint_group.jpg){.img-rounded}
