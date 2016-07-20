@@ -7,11 +7,9 @@ Summary: Summary of new the features in pytest 3.0, compared to 2.9.
 
 This blog post provides a short overview of some of the major features and changes in pytest 3.0. See the [CHANGELOG](http://doc.pytest.org/en/latest/changelog.html) for the complete list.
 
-# New entry point: ``pytest``
+# Additional command alias: `pytest`
 
 pytest came into existence as part of the [py](https://readthedocs.org/projects/pylib/) library, providing a tool called `py.test`.
-
-When pytest as a test runner came into existence, it was actually a tool in the [py](https://readthedocs.org/projects/pylib/) library called `py.test`. 
 
 Even after pytest was moved to a separate project, the `py.test` name for the command-line tool was kept to preserve backward compatibility with existing scripts and tools.
 
@@ -19,9 +17,9 @@ In pytest-3.0 the command-line tool is now called `pytest`, which is easier to t
 
 Note that `py.test` still works.
 
-# ``approx()``: function for comparing floating-point numbers
+# `approx()`: function for comparing floating-point numbers
  
-The ``approx`` function makes it easy to perform floating-point comparisons using a syntax that's as intuitive and close to pytest's philosophy:
+The `approx` function makes it easy to perform floating-point comparisons using a syntax that's as intuitive and close to pytest's philosophy:
 
     :::python
     from pytest import approx
@@ -44,7 +42,7 @@ Fixtures marked with `@pytest.fixture` can now use `yield` statements to provide
         yield smtp
         smtp.close()
 
-This makes it easier to change an existing fixture that uses `return` to return its values to use `yield` syntax if teardown code is needed later. Also, many users consider this style more clearer and natural than the previous method of registering a finalizer function using `request.addfinalizer` because the flow of the test is more explicit. Consider:
+This makes it easier to change an existing fixture that uses `return` to use `yield` syntax if teardown code is needed later. Also, many users consider this style more clearer and natural than the previous method of registering a finalizer function using `request.addfinalizer` because the flow of the test is more explicit. Consider:
 
     @pytest.fixture(scope="module")
     def smtp(request):
@@ -71,8 +69,9 @@ auto-use fixtures to provide names to doctests.
     def add_np(doctest_namespace):
         doctest_namespace['np'] = numpy
 
-Doctests in the same below the `conftest.py` file can now use the `numpy` module directly:
+Doctests below the `conftest.py` file in the directory hierarchy can now use the `numpy` module directly:
 
+    :::python
     # content of numpy.py
     def arange():
         """
@@ -110,7 +109,7 @@ This solves the problem where the function argument shadows the argument name, w
 # `pytest.raises`: regular expressions and custom messages
  
 The `ExceptionInfo.match` method can be used to check exception messages using regular expressions, similar to `TestCase.assertRaisesRegexp` method
-from ``unittest``:
+from `unittest`:
 
     :::python
     import pytest
@@ -136,6 +135,30 @@ Also, the context manager form accepts a `message` keyword parameter to raise a 
     def test_inputs(val):
         with pytest.raises(KeyError, message="Key error not raised for {}".format(val)):
             check_input(val)
+
+# `invocation`-scoped fixtures
+
+An `invocation`-scoped fixture is cached in the same way as the fixture or test function that requests it. 
+
+For example:
+
+    ::python
+    @pytest.fixture(scope='invocation')
+    def process_manager():
+        """
+        Return a ProcessManager instance which can be used to start 
+        long-lived processes and ensures they are terminated at the
+        appropriate scope.
+        """
+        m = ProcessManager()
+        yield m
+        m.shutdown_all()
+
+The `process_manager` fixture can be requested from test functions or fixtures of any scope, with each scope having its own `ProcessManager` instance.
+
+Also, `monkeypatch` is now `invocation`-scoped it so can be used from `session`-scoped fixtures where previously you would get an error that you can not use a `function`-scoped fixture from a `session`-scoped one.
+
+See the [docs](http://doc.pytest.org/en/features/invocation-fixture.html) for more information.
 
 # New hooks
 
@@ -182,7 +205,7 @@ This will result in the following tests:
     Overrides values from the configuration file (`pytest.ini`). For example, `"-o xfail_strict=True"` will make all `xfail` markers act as `strict`, failing the test suite if they exit with `XPASS` status.
 
 * `--pdbcls`:
-    Allow passing a custom debugger class using `<module>:<class:` syntax, for example `--pdbcls=IPython.core.debugger:Pdb`.
+    Allow passing a custom debugger class that should be used together with the `--pdb` option. Syntax is in the form `<module>:<class:`, for example `--pdbcls=IPython.core.debugger:Pdb`.
 
 # Documentation Restructuring
 
@@ -207,7 +230,7 @@ The pytest team took the opportunity to discuss how to handle feature deprecatio
 
 Not showing them by default is confusing to users, as most people don't know how to display them in the first place. Also, it will help wider adoption of new ways of using pytest's features.
 
-## Deadline for deprecated features: new major version.
+## Deadline for deprecated features: new major version
 
 Following [semantic versioning](http://semver.org/), the pytest team will add deprecation warnings to features which are considered obsolete because there are better alternatives or usage is low while maintenance burden on the team is high. Deprecated features will only be removed on the next **major** release, for example pytest-4.0, giving users and plugin authors ample time to update. 
 
@@ -217,6 +240,11 @@ The following features have been considered officially deprecated in pytest-3.0,
 
 * `yield-based` tests; use `@pytest.mark.parametrize` instead;
 * `pytest_funcarg__` prefix to declare fixtures; use `@pytest.fixture` decorator instead;
+
+# Small improvements and bug-fixes
+
+As usual, this release includes a lot of small improvements and bug fixes. Make sure to checkout the full [CHANGELOG](http://doc.pytest.org/en/latest/changelog.html) for the complete list.
+
 
  
  
