@@ -206,6 +206,9 @@ This will result in the following tests:
 
 * `--pdbcls`:
     Allow passing a custom debugger class that should be used together with the `--pdb` option. Syntax is in the form `<module>:<class:`, for example `--pdbcls=IPython.core.debugger:Pdb`.
+    
+*  `--doctest-report`:
+    Changes the diff output format for doctests, can be one of: `none`, `udiff`, `cdiff`, `ndiff` or `only_first_failure`.
 
 # Documentation Restructuring
 
