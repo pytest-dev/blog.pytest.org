@@ -136,30 +136,6 @@ Also, the context manager form accepts a `message` keyword parameter to raise a 
         with pytest.raises(KeyError, message="Key error not raised for {}".format(val)):
             check_input(val)
 
-# `invocation`-scoped fixtures
-
-An `invocation`-scoped fixture is cached in the same way as the fixture or test function that requests it. 
-
-For example:
-
-    ::python
-    @pytest.fixture(scope='invocation')
-    def process_manager():
-        """
-        Return a ProcessManager instance which can be used to start 
-        long-lived processes and ensures they are terminated at the
-        appropriate scope.
-        """
-        m = ProcessManager()
-        yield m
-        m.shutdown_all()
-
-The `process_manager` fixture can be requested from test functions or fixtures of any scope, with each scope having its own `ProcessManager` instance.
-
-Also, `monkeypatch` is now `invocation`-scoped it so can be used from `session`-scoped fixtures where previously you would get an error that you can not use a `function`-scoped fixture from a `session`-scoped one.
-
-See the [docs](http://doc.pytest.org/en/features/invocation-fixture.html) for more information.
-
 # New hooks
 
 pytest-3.0 adds new hooks, useful both for plugin authors and local `conftest.py` plugins:
