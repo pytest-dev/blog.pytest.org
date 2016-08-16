@@ -186,12 +186,6 @@ This will result in the following tests:
 *  `--doctest-report`:
     Changes the diff output format for doctests, can be one of: `none`, `udiff`, `cdiff`, `ndiff` or `only_first_failure`.
 
-# Documentation Restructuring
-
-While pytest's documentation works as an excellent tutorial, users often ask for a more structured documentation.
-
-XXX: add more, suggestions are welcome.
-
 
 # Assert reinterpretation is gone
 
