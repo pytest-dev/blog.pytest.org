@@ -2,7 +2,6 @@ Title: What's new in pytest 3.0
 Date: 2016-07-12 12:00
 Tags: whatsnew
 Authors: nicoddemus
-Status: draft
 Summary: Summary of new the features in pytest 3.0, compared to 2.9. 
 
 This blog post provides a short overview of some of the major features and changes in pytest 3.0. See the [CHANGELOG](http://doc.pytest.org/en/latest/changelog.html) for the complete list.
