@@ -213,6 +213,7 @@ The following features have been considered officially deprecated in pytest-3.0,
 
 * `yield-based` tests; use `@pytest.mark.parametrize` instead;
 * `pytest_funcarg__` prefix to declare fixtures; use `@pytest.fixture` decorator instead;
+* `--resultlog`: this option was rarely used and there are more modern alternatives;
 
 # Small improvements and bug-fixes
 
