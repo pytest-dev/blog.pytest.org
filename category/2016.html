@@ -40,6 +40,214 @@
             <div class="col-md-8 main-content">
 <div class="section">
     <h1 class="entry-title">
+      <a href="/2016/whats-new-in-pytest-30/">What's new in pytest 3.0</a>
+    </h1>
+    <abbr>
+      <div class="date">
+      published 2016-07-12 12:00
+      </div>
+      <div class="author">
+         written by <a class="url fn" href="/author/nicoddemus.html">nicoddemus</a>
+      </div>
+      <div class="tagslist">
+        tags: whatsnew
+      </div>
+    </abbr>
+      <div class="entry-content">
+        <p>This blog post provides a short overview of some of the major features and changes in pytest 3.0. See the <a href="http://doc.pytest.org/en/latest/changelog.html">CHANGELOG</a> for the complete list.</p>
+<h1>Additional command alias: <code>pytest</code></h1>
+<p>pytest came into existence as part of the <a href="https://readthedocs.org/projects/pylib/">py</a> library, providing a tool called <code>py.test</code>.</p>
+<p>Even after pytest was moved to a separate project, the <code>py.test</code> name for the command-line tool was kept to preserve backward compatibility with existing scripts and tools.</p>
+<p>In pytest-3.0 the command-line tool is now called <code>pytest</code>, which is easier to type and prevents some common misunderstandings when tools with the same name are installed in the system.</p>
+<p>Note that <code>py.test</code> still works.</p>
+<h1><code>approx()</code>: function for comparing floating-point numbers</h1>
+<p>The <code>approx</code> function makes it easy to perform floating-point comparisons using a syntax that's as intuitive and close to pytest's philosophy:</p>
+<div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pytest</span> <span class="kn">import</span> <span class="n">approx</span>
+
+<span class="k">def</span> <span class="nf">test_similar</span><span class="p">():</span>
+    <span class="n">v</span> <span class="o">=</span> <span class="mf">0.1</span>
+    <span class="k">assert</span> <span class="p">(</span><span class="n">v</span> <span class="o">+</span> <span class="mf">0.2</span><span class="p">)</span> <span class="o">==</span> <span class="n">approx</span><span class="p">(</span><span class="mf">0.3</span><span class="p">)</span>
+</pre></div>
+
+
+<h1><code>yield</code> statements in <code>@pytest.fixture</code></h1>
+<p>Fixtures marked with <code>@pytest.fixture</code> can now use <code>yield</code> statements to provide values for test functions exactly like fixtures marked with <code>@pytest.yield_fixture</code> decorator:</p>
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">smtplib</span>
+<span class="kn">import</span> <span class="nn">pytest</span>
+
+<span class="nd">@pytest.fixture</span><span class="p">(</span><span class="n">scope</span><span class="o">=</span><span class="s2">&quot;module&quot;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">smtp</span><span class="p">():</span>
+    <span class="n">smtp</span> <span class="o">=</span> <span class="n">smtplib</span><span class="o">.</span><span class="n">SMTP</span><span class="p">(</span><span class="s2">&quot;smtp.gmail.com&quot;</span><span class="p">)</span>
+    <span class="k">yield</span> <span class="n">smtp</span>
+    <span class="n">smtp</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</pre></div>
+
+
+<p>This makes it easier to change an existing fixture that uses <code>return</code> to use <code>yield</code> syntax if teardown code is needed later. Also, many users consider this style more clearer and natural than the previous method of registering a finalizer function using <code>request.addfinalizer</code> because the flow of the test is more explicit. Consider:</p>
+<div class="highlight"><pre><span></span>@pytest.fixture(scope=&quot;module&quot;)
+def smtp(request):
+    smtp = smtplib.SMTP(&quot;smtp.gmail.com&quot;)
+    request.addfinalizer(smtp.close)
+    return smtp
+</pre></div>
+
+
+<p>This change renders <code>@pytest.yield_fixture</code> deprecated and makes <code>@pytest.fixture</code> with <code>yield</code> statements the recommended way to write fixtures which require teardown code.</p>
+<p>Note that registering finalizers in <code>request</code> is still supported and there's no intention of removing it in future pytest versions.</p>
+<h1><code>doctest_namespace</code> fixture</h1>
+<p>The <code>doctest_namespace</code> fixture can be used to inject items into the
+namespace in which doctests run. It is intended to be used by
+auto-use fixtures to provide names to doctests.</p>
+<p><code>doctest_namespace</code> is a standard <code>dict</code> object:</p>
+<div class="highlight"><pre><span></span><span class="c1"># content of conftest.py</span>
+<span class="kn">import</span> <span class="nn">numpy</span>
+<span class="nd">@pytest.fixture</span><span class="p">(</span><span class="n">autouse</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">add_np</span><span class="p">(</span><span class="n">doctest_namespace</span><span class="p">):</span>
+    <span class="n">doctest_namespace</span><span class="p">[</span><span class="s1">&#39;np&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">numpy</span>
+</pre></div>
+
+
+<p>Doctests below the <code>conftest.py</code> file in the directory hierarchy can now use the <code>numpy</code> module directly:</p>
+<div class="highlight"><pre><span></span><span class="c1"># content of numpy.py</span>
+<span class="k">def</span> <span class="nf">arange</span><span class="p">():</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    &gt;&gt;&gt; a = np.arange(10)</span>
+<span class="sd">    &gt;&gt;&gt; len(a)</span>
+<span class="sd">    10</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">pass</span>
+</pre></div>
+
+
+<h1>Fixture <code>name</code> parameter</h1>
+<p>Fixtures now support a <code>name</code> parameter which allow them to be accessed by a different name than the function which defines it:</p>
+<div class="highlight"><pre><span></span><span class="nd">@pytest.fixture</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;value&#39;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">fixture_value</span><span class="p">():</span>
+    <span class="k">return</span> <span class="mi">10</span>
+
+<span class="k">def</span> <span class="nf">test_foo</span><span class="p">(</span><span class="n">value</span><span class="p">):</span>
+    <span class="k">assert</span> <span class="n">value</span> <span class="o">==</span> <span class="mi">10</span>
+</pre></div>
+
+
+<p>This solves the problem where the function argument shadows the argument name, which annoys pylint and might cause bugs if one forgets to pull a fixture into a test function.</p>
+<h1>Disable capture within a test</h1>
+<p><code>capsys</code> and <code>capfd</code> fixtures now support a <code>disabled</code> context-manager method which can be used to disable output capture temporarily within a test or fixture:</p>
+<div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">test_disabling_capturing</span><span class="p">(</span><span class="n">capsys</span><span class="p">):</span>
+    <span class="k">print</span><span class="p">(</span><span class="s1">&#39;this output is captured&#39;</span><span class="p">)</span>
+    <span class="k">with</span> <span class="n">capsys</span><span class="o">.</span><span class="n">disabled</span><span class="p">():</span>
+        <span class="k">print</span><span class="p">(</span><span class="s1">&#39;output not captured, going directly to sys.stdout&#39;</span><span class="p">)</span>
+    <span class="k">print</span><span class="p">(</span><span class="s1">&#39;this output is also captured&#39;</span><span class="p">)</span>
+</pre></div>
+
+
+<h1><code>pytest.raises</code>: regular expressions and custom messages</h1>
+<p>The <code>ExceptionInfo.match</code> method can be used to check exception messages using regular expressions, similar to <code>TestCase.assertRaisesRegexp</code> method
+from <code>unittest</code>:</p>
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pytest</span>
+
+<span class="k">def</span> <span class="nf">myfunc</span><span class="p">():</span>
+    <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Exception 123 raised&quot;</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">test_match</span><span class="p">():</span>
+    <span class="k">with</span> <span class="n">pytest</span><span class="o">.</span><span class="n">raises</span><span class="p">(</span><span class="ne">ValueError</span><span class="p">)</span> <span class="k">as</span> <span class="n">excinfo</span><span class="p">:</span>
+        <span class="n">myfunc</span><span class="p">()</span>
+    <span class="n">excinfo</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="s1">r&#39;.* 123 .*&#39;</span><span class="p">)</span>
+</pre></div>
+
+
+<p>The regexp parameter is matched with the <code>re.search</code> function.</p>
+<p>Also, the context manager form accepts a <code>message</code> keyword parameter to raise a custom message when the expected exception does not occur:</p>
+<div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">check_input</span><span class="p">(</span><span class="n">val</span><span class="p">):</span>
+    <span class="k">if</span> <span class="nb">input</span> <span class="o">==</span> <span class="s2">&quot;b&quot;</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">KeyError</span>
+
+<span class="nd">@pytest.mark.parametrize</span><span class="p">(</span><span class="s1">&#39;val&#39;</span><span class="p">,</span> <span class="p">[</span><span class="s2">&quot;a&quot;</span><span class="p">,</span> <span class="s2">&quot;b&quot;</span><span class="p">,</span> <span class="s2">&quot;c&quot;</span><span class="p">])</span>
+<span class="k">def</span> <span class="nf">test_inputs</span><span class="p">(</span><span class="n">val</span><span class="p">):</span>
+    <span class="k">with</span> <span class="n">pytest</span><span class="o">.</span><span class="n">raises</span><span class="p">(</span><span class="ne">KeyError</span><span class="p">,</span> <span class="n">message</span><span class="o">=</span><span class="s2">&quot;Key error not raised for {}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">val</span><span class="p">)):</span>
+        <span class="n">check_input</span><span class="p">(</span><span class="n">val</span><span class="p">)</span>
+</pre></div>
+
+
+<h1>New hooks</h1>
+<p>pytest-3.0 adds new hooks, useful both for plugin authors and local <code>conftest.py</code> plugins:</p>
+<ul>
+<li><code>pytest_fixture_setup(fixturedef, request)</code>: executes the fixture setup; </li>
+<li><code>pytest_fixture_post_finalizer(fixturedef)</code>: called after the fixture's finalizer and has access to the fixture's result cache;</li>
+<li><code>pytest_make_parametrize_id(config, val)</code>: allow plugins to provide user-friendly strings for custom types to be used by <code>@pytest.mark.parametrize</code> calls;</li>
+</ul>
+<p>Complete documentation for all pytest hooks can be found in the <a href="doc.pytest.org/en/latest/writing_plugins.html">hooks documentation</a>.</p>
+<h1>Parametrize changes</h1>
+<p>Parametrize ids can now be set to <code>None</code>, in which case the automatically generated id will be used:</p>
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pytest</span>
+<span class="nd">@pytest.mark.parametrize</span><span class="p">((</span><span class="s2">&quot;a,b&quot;</span><span class="p">),</span> <span class="p">[(</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">),</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">),</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">)],</span>
+                         <span class="n">ids</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;basic&quot;</span><span class="p">,</span> <span class="bp">None</span><span class="p">,</span> <span class="s2">&quot;advanced&quot;</span><span class="p">])</span>  
+<span class="k">def</span> <span class="nf">test_function</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
+    <span class="k">assert</span> <span class="n">a</span> <span class="o">==</span> <span class="n">b</span>
+</pre></div>
+
+
+<p>This will result in the following tests:</p>
+<ul>
+<li><code>test_function[basic]</code></li>
+<li><code>test_function[1-1]</code></li>
+<li><code>test_function[advanced]</code></li>
+</ul>
+<h1>New command line options</h1>
+<ul>
+<li>
+<p><code>--fixtures-per-test</code>: 
+    Shows which fixtures are being used for each selected test item. Features doc strings of fixtures by default. Can also show where fixtures are defined if combined with <code>-v</code>.</p>
+</li>
+<li>
+<p><code>--setup-show</code>: 
+    Performs normal test execution and additionally shows the setup and teardown of fixtures.    </p>
+</li>
+<li>
+<p><code>--setup-plan</code>:
+    Performs normal collection and reports the potential setups and teardowns, but does not execute fixtures and tests.</p>
+</li>
+<li>
+<p><code>--setup-only</code>: 
+    Performs normal collection, executes setup and teardown of fixtures and reports them.</p>
+</li>
+<li>
+<p><code>--override-ini</code>/<code>-o</code>:
+    Overrides values from the configuration file (<code>pytest.ini</code>). For example, <code>"-o xfail_strict=True"</code> will make all <code>xfail</code> markers act as <code>strict</code>, failing the test suite if they exit with <code>XPASS</code> status.</p>
+</li>
+<li>
+<p><code>--pdbcls</code>:
+    Allow passing a custom debugger class that should be used together with the <code>--pdb</code> option. Syntax is in the form <code>&lt;module&gt;:&lt;class:</code>, for example <code>--pdbcls=IPython.core.debugger:Pdb</code>.</p>
+</li>
+<li>
+<p><code>--doctest-report</code>:
+    Changes the diff output format for doctests, can be one of: <code>none</code>, <code>udiff</code>, <code>cdiff</code>, <code>ndiff</code> or <code>only_first_failure</code>.</p>
+</li>
+</ul>
+<h1>Assert reinterpretation is gone</h1>
+<p>Assertion reinterpretation was the preferred method to display better assertion meessages before assertion rewriting was implemented. Assertion rewriting is safer because there is no risk of introducing subtle errors because of assertions with side-effects. The <code>--assert=reinterp</code> option has also been removed.</p>
+<p>See this <a href="http://pybites.blogspot.com.br/2011/07/behind-scenes-of-pytests-new-assertion.html">excellent blog post</a> by Benjamin Peterson for a great overview of the assertion-rewriting mechanism.</p>
+<p>In addition to this change, assertion rewriting is now also applied automatically in <code>conftest.py</code> files and plugins installed using <code>setuptools</code>.</p>
+<h1>Feature Deprecation</h1>
+<p>The pytest team took the opportunity to discuss how to handle feature deprecation during the <a href="/2016/pytest-development-sprint/">pytest 2016 sprint</a>, intending to minimize impact on the users as well as slowly fade-out some outdated features. It was decided:</p>
+<h2>Internal pytest-warnings now are displayed by default</h2>
+<p>Not showing them by default is confusing to users, as most people don't know how to display them in the first place. Also, it will help wider adoption of new ways of using pytest's features.</p>
+<h2>Deadline for deprecated features: new major version</h2>
+<p>Following <a href="http://semver.org/">semantic versioning</a>, the pytest team will add deprecation warnings to features which are considered obsolete because there are better alternatives or usage is low while maintenance burden on the team is high. Deprecated features will only be removed on the next <strong>major</strong> release, for example pytest-4.0, giving users and plugin authors ample time to update. </p>
+<h2>Deprecated features</h2>
+<p>The following features have been considered officially deprecated in pytest-3.0, emitting pytest-warnings when used and scheduled for removal in 4.0:</p>
+<ul>
+<li><code>yield-based</code> tests; use <code>@pytest.mark.parametrize</code> instead;</li>
+<li><code>pytest_funcarg__</code> prefix to declare fixtures; use <code>@pytest.fixture</code> decorator instead;</li>
+<li><code>--resultlog</code>: this option was rarely used and there are more modern alternatives;</li>
+</ul>
+<h1>Small improvements and bug-fixes</h1>
+<p>As usual, this release includes a lot of small improvements and bug fixes. Make sure to checkout the full <a href="http://doc.pytest.org/en/latest/changelog.html">CHANGELOG</a> for the complete list.</p>
+      </div><!-- /.entry-content -->
+</div>
+
+<div class="section">
+    <h1 class="entry-title">
       <a href="/2016/pytest-development-sprint/">pytest development sprint</a>
     </h1>
     <abbr>
