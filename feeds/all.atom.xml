@@ -170,7 +170,7 @@ from &lt;code&gt;unittest&lt;/code&gt;:&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
 &lt;h1&gt;Assert reinterpretation is gone&lt;/h1&gt;
-&lt;p&gt;Assertion reinterpretation was the preferred method to display better assertion meessages before assertion rewriting was implemented. Assertion rewriting is safer because there is no risk of introducing subtle errors because of assertions with side-effects. The &lt;code&gt;--assert=reinterp&lt;/code&gt; option has also been removed.&lt;/p&gt;
+&lt;p&gt;Assertion reinterpretation was the preferred method to display better assertion messages before assertion rewriting was implemented. Assertion rewriting is safer because there is no risk of introducing subtle errors because of assertions with side-effects. The &lt;code&gt;--assert=reinterp&lt;/code&gt; option has also been removed.&lt;/p&gt;
 &lt;p&gt;See this &lt;a href="http://pybites.blogspot.com.br/2011/07/behind-scenes-of-pytests-new-assertion.html"&gt;excellent blog post&lt;/a&gt; by Benjamin Peterson for a great overview of the assertion-rewriting mechanism.&lt;/p&gt;
 &lt;p&gt;In addition to this change, assertion rewriting is now also applied automatically in &lt;code&gt;conftest.py&lt;/code&gt; files and plugins installed using &lt;code&gt;setuptools&lt;/code&gt;.&lt;/p&gt;
 &lt;h1&gt;Feature Deprecation&lt;/h1&gt;
