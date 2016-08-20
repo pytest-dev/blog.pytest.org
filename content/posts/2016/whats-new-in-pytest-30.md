@@ -188,7 +188,7 @@ This will result in the following tests:
 
 # Assert reinterpretation is gone
 
-Assertion reinterpretation was the preferred method to display better assertion meessages before assertion rewriting was implemented. Assertion rewriting is safer because there is no risk of introducing subtle errors because of assertions with side-effects. The `--assert=reinterp` option has also been removed.
+Assertion reinterpretation was the preferred method to display better assertion messages before assertion rewriting was implemented. Assertion rewriting is safer because there is no risk of introducing subtle errors because of assertions with side-effects. The `--assert=reinterp` option has also been removed.
 
 See this [excellent blog post](http://pybites.blogspot.com.br/2011/07/behind-scenes-of-pytests-new-assertion.html) by Benjamin Peterson for a great overview of the assertion-rewriting mechanism.
 
