@@ -5,29 +5,36 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
 <loc>/</loc>
-<lastmod>2016-08-20T14:37:49-00:00</lastmod>
+<lastmod>2017-11-27T21:46:30-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>/archives.html</loc>
-<lastmod>2016-08-20T14:37:49-00:00</lastmod>
+<lastmod>2017-11-27T21:46:30-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>/tags.html</loc>
-<lastmod>2016-08-20T14:37:49-00:00</lastmod>
+<lastmod>2017-11-27T21:46:30-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>/categories.html</loc>
-<lastmod>2016-08-20T14:37:49-00:00</lastmod>
+<lastmod>2017-11-27T21:46:30-00:00</lastmod>
 <changefreq>daily</changefreq>
+<priority>0.5</priority>
+</url>
+
+<url>
+<loc>/2017/whats-new-in-pytest-33/</loc>
+<lastmod>2017-11-27T18:00:00+01:00</lastmod>
+<changefreq>monthly</changefreq>
 <priority>0.5</priority>
 </url>
 
@@ -74,22 +81,8 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 </url>
 
 <url>
-<loc>/tag/meta.html</loc>
-<lastmod>2016-06-24T12:00:00+01:00</lastmod>
-<changefreq>daily</changefreq>
-<priority>0.5</priority>
-</url>
-
-<url>
-<loc>/tag/whatsnew.html</loc>
-<lastmod>2016-07-12T12:00:00+01:00</lastmod>
-<changefreq>daily</changefreq>
-<priority>0.5</priority>
-</url>
-
-<url>
-<loc>/tag/sprint2016.html</loc>
-<lastmod>2016-07-07T09:00:00+01:00</lastmod>
+<loc>/category/2017.html</loc>
+<lastmod>2017-11-27T18:00:00+01:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
@@ -102,8 +95,29 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 </url>
 
 <url>
+<loc>/tag/sprint2016.html</loc>
+<lastmod>2016-07-07T09:00:00+01:00</lastmod>
+<changefreq>daily</changefreq>
+<priority>0.5</priority>
+</url>
+
+<url>
+<loc>/tag/meta.html</loc>
+<lastmod>2016-06-24T12:00:00+01:00</lastmod>
+<changefreq>daily</changefreq>
+<priority>0.5</priority>
+</url>
+
+<url>
+<loc>/tag/whatsnew.html</loc>
+<lastmod>2017-11-27T18:00:00+01:00</lastmod>
+<changefreq>daily</changefreq>
+<priority>0.5</priority>
+</url>
+
+<url>
 <loc>/author/nicoddemus.html</loc>
-<lastmod>2016-07-12T12:00:00+01:00</lastmod>
+<lastmod>2017-11-27T18:00:00+01:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>

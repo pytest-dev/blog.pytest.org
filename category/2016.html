@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
         <title>pytest blog</title>
-            <link rel="stylesheet" href="/theme/css/style.min.css?49d891dd">
+            <link rel="stylesheet" href="/">
         <meta charset="utf-8" />
 
         <link href="/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="pytest blog Atom Feed" />
@@ -152,7 +152,7 @@ from <code>unittest</code>:</p>
 <span class="k">def</span> <span class="nf">test_match</span><span class="p">():</span>
     <span class="k">with</span> <span class="n">pytest</span><span class="o">.</span><span class="n">raises</span><span class="p">(</span><span class="ne">ValueError</span><span class="p">)</span> <span class="k">as</span> <span class="n">excinfo</span><span class="p">:</span>
         <span class="n">myfunc</span><span class="p">()</span>
-    <span class="n">excinfo</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="s1">r&#39;.* 123 .*&#39;</span><span class="p">)</span>
+    <span class="n">excinfo</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;.* 123 .*&#39;</span><span class="p">)</span>
 </pre></div>
 
 

@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
         <title>pytest blog - Articles by nicoddemus</title>
-            <link rel="stylesheet" href="/theme/css/style.min.css?49d891dd">
+            <link rel="stylesheet" href="/">
         <meta charset="utf-8" />
 
         <link href="/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="pytest blog Atom Feed" />
@@ -38,6 +38,78 @@
                 </ul>
             </div>
             <div class="col-md-8 main-content">
+<div class="section">
+    <h1 class="entry-title">
+      <a href="/2017/whats-new-in-pytest-33/">What's new in pytest 3.3</a>
+    </h1>
+    <abbr>
+      <div class="date">
+      published 2017-11-27 18:00
+      </div>
+      <div class="author">
+         written by <a class="url fn" href="/author/nicoddemus.html">nicoddemus</a>
+      </div>
+      <div class="tagslist">
+        tags: whatsnew
+      </div>
+    </abbr>
+      <div class="entry-content">
+        <p>This blog post provides a short overview of some of the major features and changes in pytest 3.3. See the <a href="http://doc.pytest.org/en/latest/changelog.html">CHANGELOG</a> for the complete list.</p>
+<h1>Python 2.6 and 3.3 support dropped</h1>
+<p>Pytest 3.3 and onwards will no longer support Python 2.6 and 3.3. Those Python versions are EOL for some time now and incur maintenance and compatibility costs on the pytest core team, and following up with the rest of the community we decided that they will no longer be supported starting with this version. Users using those versions and with a modern enough <code>pip</code> should not be affected, otherwise they should pin pytest to &lt;3.3.</p>
+<h1>Logging capture</h1>
+<p>Pytest now captures and displays output from the standard logging module. The user can control the logging level to be captured by specifying options in pytest.ini, the command line and also during individual tests using markers. Also, a <code>caplog</code> fixture is available that enables users to test the captured log during specific tests (similar to <code>capsys</code> for example). For more information, please see the <a href="https://docs.pytest.org/en/latest/logging.html">logging docs</a>. This feature was introduced by merging the popular <a href="https://pypi.org/project/pytest-catchlog/">pytest-catchlog</a> plugin, thanks to <a href="https://github.com/thisch">Thomas Hisch</a>. Be advised that with this merge the backward compatibility interface with the defunct pytest-capturelog has been dropped. </p>
+<h1>Progress display</h1>
+<p>The pytest output now includes a percentage indicator. Here's the partial output of pytest's own test suite:</p>
+<div class="highlight"><pre><span></span>============================= test session starts =============================
+platform win32 -- Python 3.6.3, pytest-3.3.0, py-1.5.2, pluggy-0.6.0
+rootdir: C:\Users\appveyor\AppData\Local\Temp\1\devpi-test0\targz\pytest-3.3.0, inifile: tox.ini
+plugins: hypothesis-3.38.5
+collected 1985 items
+
+testing\acceptance_test.py ...............s............................. [  2%]
+...x.............                                                        [  3%]
+testing\deprecated_test.py ........                                      [  3%]
+testing\test_argcomplete.py ss                                           [  3%]
+testing\test_assertion.py .............................................. [  5%]
+...........................s.......                                      [  7%]
+testing\test_assertrewrite.py ......................................s..s [  9%]
+sss...........                                                           [ 10%]
+</pre></div>
+
+
+<p>The output can be changed back to its former style by configuring your <code>pytest.ini</code>:</p>
+<div class="highlight"><pre><span></span><span class="k">[pytest]</span>
+<span class="na">console_output_style</span><span class="o">=</span><span class="s">classic</span>
+</pre></div>
+
+
+<h1>New capfdbinary and capsysbinary fixtures</h1>
+<p>Those two new fixtures return their contents as <code>bytes</code> instead of <code>str</code>, making them suitable to interact with programs that write binary data
+to stdout/stderr.</p>
+<h1>pytest.skip() at module level</h1>
+<p><code>pytest.skip</code> in 3.0 was changed so it could not be used at the module level; it was a common mistake to use it as a decorator in a test function,
+when the user should have used <code>pytest.mark.skip</code> instead, which would cause the whole module to be skipped.</p>
+<p>Some users missed this functionality, so <code>allow_module_level</code> can be passed to <code>pytest.skip</code> to skip an entire module:</p>
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pytest</span>
+
+<span class="n">pytest</span><span class="o">.</span><span class="n">skip</span><span class="p">(</span><span class="n">reason</span><span class="o">=</span><span class="s1">&#39;this whole module is TODO&#39;</span><span class="p">,</span> <span class="n">allow_module_level</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+</pre></div>
+
+
+<h1>New dependencies</h1>
+<p>Pytest now depends on the following modules:</p>
+<ul>
+<li><a href="https://pypi.org/project/attrs/">attrs</a></li>
+<li><a href="https://pypi.org/project/six/">six</a></li>
+<li><a href="https://pypi.org/project/pluggy/">pluggy</a></li>
+</ul>
+<p>This change should not affect users.</p>
+<h1>Improvements and bugfixes</h1>
+<p>As usual, this release includes a lot of small improvements and bug fixes. Read the full <a href="http://doc.pytest.org/en/latest/changelog.html">CHANGELOG</a> for the complete list.</p>
+      </div><!-- /.entry-content -->
+</div>
+
 <div class="section">
     <h1 class="entry-title">
       <a href="/2016/whats-new-in-pytest-30/">What's new in pytest 3.0</a>
@@ -152,7 +224,7 @@ from <code>unittest</code>:</p>
 <span class="k">def</span> <span class="nf">test_match</span><span class="p">():</span>
     <span class="k">with</span> <span class="n">pytest</span><span class="o">.</span><span class="n">raises</span><span class="p">(</span><span class="ne">ValueError</span><span class="p">)</span> <span class="k">as</span> <span class="n">excinfo</span><span class="p">:</span>
         <span class="n">myfunc</span><span class="p">()</span>
-    <span class="n">excinfo</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="s1">r&#39;.* 123 .*&#39;</span><span class="p">)</span>
+    <span class="n">excinfo</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;.* 123 .*&#39;</span><span class="p">)</span>
 </pre></div>
 
 

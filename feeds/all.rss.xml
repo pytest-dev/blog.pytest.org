@@ -1,5 +1,57 @@
 <?xml version="1.0" encoding="utf-8"?>
-<rss version="2.0"><channel><title>pytest blog</title><link>/</link><description></description><lastBuildDate>Tue, 12 Jul 2016 12:00:00 +0200</lastBuildDate><item><title>What's new in pytest 3.0</title><link>/2016/whats-new-in-pytest-30/</link><description>&lt;p&gt;This blog post provides a short overview of some of the major features and changes in pytest 3.0. See the &lt;a href="http://doc.pytest.org/en/latest/changelog.html"&gt;CHANGELOG&lt;/a&gt; for the complete list.&lt;/p&gt;
+<rss version="2.0"><channel><title>pytest blog</title><link>/</link><description></description><lastBuildDate>Mon, 27 Nov 2017 18:00:00 +0100</lastBuildDate><item><title>What's new in pytest 3.3</title><link>/2017/whats-new-in-pytest-33/</link><description>&lt;p&gt;This blog post provides a short overview of some of the major features and changes in pytest 3.3. See the &lt;a href="http://doc.pytest.org/en/latest/changelog.html"&gt;CHANGELOG&lt;/a&gt; for the complete list.&lt;/p&gt;
+&lt;h1&gt;Python 2.6 and 3.3 support dropped&lt;/h1&gt;
+&lt;p&gt;Pytest 3.3 and onwards will no longer support Python 2.6 and 3.3. Those Python versions are EOL for some time now and incur maintenance and compatibility costs on the pytest core team, and following up with the rest of the community we decided that they will no longer be supported starting with this version. Users using those versions and with a modern enough &lt;code&gt;pip&lt;/code&gt; should not be affected, otherwise they should pin pytest to &amp;lt;3.3.&lt;/p&gt;
+&lt;h1&gt;Logging capture&lt;/h1&gt;
+&lt;p&gt;Pytest now captures and displays output from the standard logging module. The user can control the logging level to be captured by specifying options in pytest.ini, the command line and also during individual tests using markers. Also, a &lt;code&gt;caplog&lt;/code&gt; fixture is available that enables users to test the captured log during specific tests (similar to &lt;code&gt;capsys&lt;/code&gt; for example). For more information, please see the &lt;a href="https://docs.pytest.org/en/latest/logging.html"&gt;logging docs&lt;/a&gt;. This feature was introduced by merging the popular &lt;a href="https://pypi.org/project/pytest-catchlog/"&gt;pytest-catchlog&lt;/a&gt; plugin, thanks to &lt;a href="https://github.com/thisch"&gt;Thomas Hisch&lt;/a&gt;. Be advised that with this merge the backward compatibility interface with the defunct pytest-capturelog has been dropped. &lt;/p&gt;
+&lt;h1&gt;Progress display&lt;/h1&gt;
+&lt;p&gt;The pytest output now includes a percentage indicator. Here's the partial output of pytest's own test suite:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;============================= test session starts =============================
+platform win32 -- Python 3.6.3, pytest-3.3.0, py-1.5.2, pluggy-0.6.0
+rootdir: C:\Users\appveyor\AppData\Local\Temp\1\devpi-test0\targz\pytest-3.3.0, inifile: tox.ini
+plugins: hypothesis-3.38.5
+collected 1985 items
+
+testing\acceptance_test.py ...............s............................. [  2%]
+...x.............                                                        [  3%]
+testing\deprecated_test.py ........                                      [  3%]
+testing\test_argcomplete.py ss                                           [  3%]
+testing\test_assertion.py .............................................. [  5%]
+...........................s.......                                      [  7%]
+testing\test_assertrewrite.py ......................................s..s [  9%]
+sss...........                                                           [ 10%]
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;The output can be changed back to its former style by configuring your &lt;code&gt;pytest.ini&lt;/code&gt;:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;[pytest]&lt;/span&gt;
+&lt;span class="na"&gt;console_output_style&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;classic&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h1&gt;New capfdbinary and capsysbinary fixtures&lt;/h1&gt;
+&lt;p&gt;Those two new fixtures return their contents as &lt;code&gt;bytes&lt;/code&gt; instead of &lt;code&gt;str&lt;/code&gt;, making them suitable to interact with programs that write binary data
+to stdout/stderr.&lt;/p&gt;
+&lt;h1&gt;pytest.skip() at module level&lt;/h1&gt;
+&lt;p&gt;&lt;code&gt;pytest.skip&lt;/code&gt; in 3.0 was changed so it could not be used at the module level; it was a common mistake to use it as a decorator in a test function,
+when the user should have used &lt;code&gt;pytest.mark.skip&lt;/code&gt; instead, which would cause the whole module to be skipped.&lt;/p&gt;
+&lt;p&gt;Some users missed this functionality, so &lt;code&gt;allow_module_level&lt;/code&gt; can be passed to &lt;code&gt;pytest.skip&lt;/code&gt; to skip an entire module:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;pytest&lt;/span&gt;
+
+&lt;span class="n"&gt;pytest&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;skip&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;reason&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;this whole module is TODO&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;allow_module_level&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="bp"&gt;True&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h1&gt;New dependencies&lt;/h1&gt;
+&lt;p&gt;Pytest now depends on the following modules:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://pypi.org/project/attrs/"&gt;attrs&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://pypi.org/project/six/"&gt;six&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://pypi.org/project/pluggy/"&gt;pluggy&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;This change should not affect users.&lt;/p&gt;
+&lt;h1&gt;Improvements and bugfixes&lt;/h1&gt;
+&lt;p&gt;As usual, this release includes a lot of small improvements and bug fixes. Read the full &lt;a href="http://doc.pytest.org/en/latest/changelog.html"&gt;CHANGELOG&lt;/a&gt; for the complete list.&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">nicoddemus</dc:creator><pubDate>Mon, 27 Nov 2017 18:00:00 +0100</pubDate><guid isPermaLink="false">tag:,2017-11-27:2017/whats-new-in-pytest-33/</guid><category>whatsnew</category></item><item><title>What's new in pytest 3.0</title><link>/2016/whats-new-in-pytest-30/</link><description>&lt;p&gt;This blog post provides a short overview of some of the major features and changes in pytest 3.0. See the &lt;a href="http://doc.pytest.org/en/latest/changelog.html"&gt;CHANGELOG&lt;/a&gt; for the complete list.&lt;/p&gt;
 &lt;h1&gt;Additional command alias: &lt;code&gt;pytest&lt;/code&gt;&lt;/h1&gt;
 &lt;p&gt;pytest came into existence as part of the &lt;a href="https://readthedocs.org/projects/pylib/"&gt;py&lt;/a&gt; library, providing a tool called &lt;code&gt;py.test&lt;/code&gt;.&lt;/p&gt;
 &lt;p&gt;Even after pytest was moved to a separate project, the &lt;code&gt;py.test&lt;/code&gt; name for the command-line tool was kept to preserve backward compatibility with existing scripts and tools.&lt;/p&gt;
@@ -97,7 +149,7 @@ from &lt;code&gt;unittest&lt;/code&gt;:&lt;/p&gt;
 &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;test_match&lt;/span&gt;&lt;span class="p"&gt;():&lt;/span&gt;
     &lt;span class="k"&gt;with&lt;/span&gt; &lt;span class="n"&gt;pytest&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;raises&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="ne"&gt;ValueError&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="k"&gt;as&lt;/span&gt; &lt;span class="n"&gt;excinfo&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
         &lt;span class="n"&gt;myfunc&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
-    &lt;span class="n"&gt;excinfo&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;match&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;r&amp;#39;.* 123 .*&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="n"&gt;excinfo&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;match&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="sa"&gt;r&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;.* 123 .*&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
