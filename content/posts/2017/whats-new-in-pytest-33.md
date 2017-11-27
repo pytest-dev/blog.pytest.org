@@ -8,12 +8,12 @@ This blog post provides a short overview of some of the major features and chang
 
 # Python 2.6 and 3.3 support dropped
 
-Pytest 3.3 and onwards will no longer supports Python 2.6 and 3.3. Those Python versions are EOL for some time now and incur maintenance and compatibility costs on the pytest core team, and following up with the rest of the community we decided that they will no longer be supported starting on this version. Users using those versions and with a modern enough `pip` should not be affected, otherwise they should pin pytest to <3.3.
+Pytest 3.3 and onwards will no longer support Python 2.6 and 3.3. Those Python versions are EOL for some time now and incur maintenance and compatibility costs on the pytest core team, and following up with the rest of the community we decided that they will no longer be supported starting with this version. Users using those versions and with a modern enough `pip` should not be affected, otherwise they should pin pytest to <3.3.
 
 
 # Logging capture
 
-Pytest now captures and displays output from the standard logging module. The user can control the logging level to be captured by specifying options in pytest.ini, the command line and also during individual tests using markers. Also, a `caplog` fixture is available that enables users to test the captured log during specific tests (similar to `capsys` for example). For more information, please see the [logging docs](https://docs.pytest.org/en/latest/logging.html). This feature was introduced by merging the popular [pytest-catchlog](https://pypi.org/project/pytest-catchlog/) plugin, thanks to [Thomas Hisch](https://github.com/thisch). Be advised that during the merging the backward compatibility interface with the defunct pytest-capturelog has been dropped. 
+Pytest now captures and displays output from the standard logging module. The user can control the logging level to be captured by specifying options in pytest.ini, the command line and also during individual tests using markers. Also, a `caplog` fixture is available that enables users to test the captured log during specific tests (similar to `capsys` for example). For more information, please see the [logging docs](https://docs.pytest.org/en/latest/logging.html). This feature was introduced by merging the popular [pytest-catchlog](https://pypi.org/project/pytest-catchlog/) plugin, thanks to [Thomas Hisch](https://github.com/thisch). Be advised that with this merge the backward compatibility interface with the defunct pytest-capturelog has been dropped. 
 
 
 # Progress display
@@ -75,9 +75,9 @@ Pytest now depends on the following modules:
 
 This change should not affect users.
 
-# Improvements and bug-fixes
+# Improvements and bugfixes
 
-As usual, this release includes a lot of small improvements and bug fixes. Make sure to checkout the full [CHANGELOG](http://doc.pytest.org/en/latest/changelog.html) for the complete list.
+As usual, this release includes a lot of small improvements and bug fixes. Read the full [CHANGELOG](http://doc.pytest.org/en/latest/changelog.html) for the complete list.
 
 
  
