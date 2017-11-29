@@ -1,5 +1,5 @@
-pelican==3.6.0
-webassets==0.10.1
+pelican==3.6.3
+webassets==0.12.1
 cssmin==0.2.0
 Markdown==2.6.2
 ghp-import2==1.0.0
