@@ -61,7 +61,7 @@ Some users missed this functionality, so `allow_module_level` can be passed to `
 ```python
 import pytest
 
-pytest.skip(reason='this whole module is TODO', allow_module_level=True)
+pytest.skip('this whole module is TODO', allow_module_level=True)
 ```
 
 
