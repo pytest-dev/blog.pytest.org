@@ -8,7 +8,7 @@ This blog post provides a short overview of some of the major features and chang
 
 # Python 2.6 and 3.3 support dropped
 
-Pytest 3.3 and onwards will no longer support Python 2.6 and 3.3. Those Python versions are EOL for some time now and incur maintenance and compatibility costs on the pytest core team, and following up with the rest of the community we decided that they will no longer be supported starting with this version. Users using those versions and with a modern enough `pip` should not be affected, otherwise they should pin pytest to <3.3.
+Pytest 3.3 and onwards will no longer support Python 2.6 and 3.3. Those Python versions are EOL for some time now and incur maintenance and compatibility costs on the pytest core team, and following up with the rest of the community we decided that they will no longer be supported starting with this version. Users using those versions and with a modern enough `pip` should not be affected, otherwise they should pin pytest to < 3.3.
 
 
 # Logging capture
